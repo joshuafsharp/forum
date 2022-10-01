@@ -5,12 +5,16 @@
         <input id="email" type="text" :value="store.user.email" disabled />
       </div>
       <div>
-        <label for="username">Name</label>
+        <label for="username">Username</label>
         <input id="username" type="text" v-model="username" />
       </div>
       <div>
-        <label for="website">Website</label>
-        <input id="website" type="website" v-model="website" />
+        <label for="firstName">First name</label>
+        <input id="firstName" type="website" v-model="firstName" />
+      </div>
+      <div>
+        <label for="lastName">Last name</label>
+        <input id="lastName" type="website" v-model="lastName" />
       </div>
   
       <div>
@@ -38,9 +42,10 @@
     export default {
       setup() {
         const loading = ref(true)
+
         const username = ref('')
-        const website = ref('')
-        const avatar_url = ref('')
+        const firstName = ref('')
+        const lastName = ref('')
   
         async function getProfile() {
           try {
@@ -49,19 +54,18 @@
   
             let { data, error, status } = await supabase
               .from('user')
-              .select(`username`)
+              .select(`username, first_name, last_name`)
               .eq('id', store.user.id)
               .single()
   
             if (error && status !== 406){
                 throw error
-                
             } 
   
             if (data) {
               username.value = data.username
-              website.value = data.website
-              avatar_url.value = data.avatar_url
+              firstName.value = data.first_name
+              lastName.value = data.last_name
             }
           } catch (error) {
             alert(error.message)
@@ -78,12 +82,12 @@
             const updates = {
               id: store.user.id,
               username: username.value,
-              website: website.value,
-              avatar_url: avatar_url.value,
+              first_name: firstName.value,
+              last_name: lastName.value,
               updated_at: new Date(),
             }
   
-            let { error } = await supabase.from('profiles').upsert(updates, {
+            let { error } = await supabase.from('user').upsert(updates, {
               returning: 'minimal', // Don't return the value after inserting
             })
   
@@ -115,8 +119,8 @@
           store,
           loading,
           username,
-          website,
-          avatar_url,
+          firstName,
+          lastName,
   
           updateProfile,
           signOut,
