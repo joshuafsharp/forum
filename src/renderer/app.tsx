@@ -1,25 +1,20 @@
-import { createSSRApp, defineComponent, h } from 'vue';
+import { createSSRApp, defineComponent } from 'vue';
 
-import PageShell from './PageShell.vue';
+import { PageShell } from './PageShell';
 import { setPageContext } from './usePageContext';
 
-import type { PageContext } from './types';
+import type { PageContext } from '~/types/viteSsr';
 
 export { createApp };
 
 function createApp(pageContext: PageContext) {
   const { Page, pageProps } = pageContext;
+
   const PageWithLayout = defineComponent({
-    render() {
-      return h(
-        PageShell,
-        {},
-        {
-          default() {
-            return h(Page, pageProps || {});
-          },
-        },
-      );
+    name: 'PageWithLayout',
+
+    setup() {
+      return () => <PageShell>{Page ? <Page {...pageProps} /> : <></>}</PageShell>;
     },
   });
 

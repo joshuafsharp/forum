@@ -1,6 +1,6 @@
 import { createApp } from './app';
 
-import type { PageContextClient } from './types';
+import type { PageContextClient } from '../types/viteSsr';
 
 export { render };
 

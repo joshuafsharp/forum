@@ -4,7 +4,7 @@ import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr';
 import { createApp } from './app';
 import logoUrl from './logo.svg';
 
-import type { PageContextServer } from './types';
+import type { PageContextServer } from '../types/viteSsr';
 
 export { render };
 // See https://vite-plugin-ssr.com/data-fetching
