@@ -1,5 +1,6 @@
-import { User } from "@supabase/supabase-js";
-import { reactive } from "vue";
+import { reactive } from 'vue';
+
+import type { User } from '@supabase/supabase-js';
 
 interface Store {
   user: User | null;
