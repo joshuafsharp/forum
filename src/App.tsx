@@ -1,31 +1,23 @@
-import {defineComponent} from 'vue'
-  import { store } from './store'
-  import { supabase } from './supabase'
-  import Auth from './components/Auth'
-  import Profile from './components/Profile'
+import { defineComponent } from "vue";
 
-  export default defineComponent({
-    setup() {
-      store.user = supabase.auth.user()
-      supabase.auth.onAuthStateChange((_, session) => {
-        store.user = session.user
-      })
+import Auth from "./components/Auth";
+import Profile from "./components/Profile";
+import { store } from "./store";
+import { supabase } from "./supabase";
 
-      return {
-        store,
-      }
-    },
+export default defineComponent({
+  name: "App",
+  setup() {
+    store.user = supabase.auth.user();
+    supabase.auth.onAuthStateChange((_, session) => {
+      store.user = session?.user || null;
+    });
 
-
-render() {
-return (
-
-
-  
-  <div class="container" style="padding: 50px 0 100px 0">
-    <Profile v-if="store.user" />
-    <Auth v-else />
-  </div>
-    )
-}
-  })
+    return (
+      <div class="container" style="padding: 50px 0 100px 0">
+        <Profile v-if="store.user" />
+        <Auth v-else />
+      </div>
+    );
+  },
+});

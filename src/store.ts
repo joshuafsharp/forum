@@ -1,5 +1,10 @@
-import { reactive } from 'vue'
+import { User } from "@supabase/supabase-js";
+import { reactive } from "vue";
 
-export const store = reactive({
-  user: {},
-})
+interface Store {
+  user: User | null;
+}
+
+export const store: Store = reactive({
+  user: null,
+});

@@ -1,29 +1,21 @@
 {
     "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
       "baseUrl": ".",
-      "module": "ESNext",
-      "target": "ESNext",
-      "lib": [
-        "DOM",
-        "ESNext"
-      ],
-      "outDir": "./dist",
-      "strict": true,
-      "esModuleInterop": true,
-      "jsx": "preserve",
-      "skipLibCheck": true,
+      "target": "esnext",
+      "useDefineForClassFields": true,
+      "module": "esnext",
       "moduleResolution": "node",
+      "strict": true,
+      "jsx": "preserve",
+      "sourceMap": true,
       "resolveJsonModule": true,
-      "noUnusedLocals": true,
-      "strictNullChecks": true,
-      "forceConsistentCasingInFileNames": true,
+      "isolatedModules": true,
+      "esModuleInterop": true,
+      "lib": ["esnext", "dom"],
+      "skipLibCheck": true,
       "types": [
-        "vitest",
-        "vite/client",
-        "vue/ref-macros",
-        "vite-plugin-pages/client",
-        "vite-plugin-vue-layouts/client",
-        "node"
+        "vite/client"
       ],
       "paths": {
         "~/*": [
@@ -31,10 +23,12 @@
         ]
       }
     },
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
     "exclude": [
       "dist",
       "node_modules",
       "cypress"
-    ]
+    ],
+    "references": [{ "path": "./tsconfig.node.json" }]
   }
   
