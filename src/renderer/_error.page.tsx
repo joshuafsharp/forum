@@ -1,15 +1,18 @@
 import { defineComponent } from 'vue';
 
-interface Props {
-  is404?: boolean
-}
+import type { PropType } from 'vue';
 
 export const ErrorPage = defineComponent({
   name: 'ErrorPage',
 
-  setup() {
-    const props = defineProps<Props>();
+  props: {
+    is404: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+  },
 
+  setup(props) {
     return () => (
       <div>
         {props.is404 ? (

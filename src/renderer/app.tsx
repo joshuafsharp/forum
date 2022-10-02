@@ -5,16 +5,26 @@ import { setPageContext } from './usePageContext';
 
 import type { PageContext } from '~/types/viteSsr';
 
-export { createApp };
-
-function createApp(pageContext: PageContext) {
+export const createApp = (pageContext: PageContext) => {
   const { Page, pageProps } = pageContext;
 
   const PageWithLayout = defineComponent({
     name: 'PageWithLayout',
 
     setup() {
-      return () => <PageShell>{Page ? <Page {...pageProps} /> : <></>}</PageShell>;
+      console.log(Page, pageProps);
+
+      return () => {
+        if (Page) {
+          return (
+            <PageShell>
+              <Page {...pageProps} />
+            </PageShell>
+          );
+        }
+
+        return <PageShell />;
+      };
     },
   });
 
@@ -24,4 +34,4 @@ function createApp(pageContext: PageContext) {
   setPageContext(app, pageContext);
 
   return app;
-}
+};
