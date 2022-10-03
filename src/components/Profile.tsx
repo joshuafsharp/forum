@@ -42,7 +42,8 @@ export const Profile = defineComponent({
       }
     }
 
-    async function updateProfile() {
+    async function updateProfile(e: any) {
+      e.preventDefault();
       try {
         loading.value = true;
         store.user = supabase.auth.user();
@@ -99,15 +100,15 @@ export const Profile = defineComponent({
         </div>
         <div>
           <label for="username">Username</label>
-          <input id="username" type="text" v-model="username" />
+          <input id="username" type="text" v-model={username.value} />
         </div>
         <div>
           <label for="firstName">First name</label>
-          <input id="firstName" type="website" v-model="firstName" />
+          <input id="firstName" type="website" v-model={firstName.value} />
         </div>
         <div>
           <label for="lastName">Last name</label>
-          <input id="lastName" type="website" v-model="lastName" />
+          <input id="lastName" type="website" v-model={lastName.value} />
         </div>
 
         <div>

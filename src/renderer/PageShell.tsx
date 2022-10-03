@@ -9,6 +9,7 @@ export const PageShell = defineComponent({
 
   setup(_props, { slots }) {
     console.log(slots);
+
     return () => (
       <div class="layout">
         <div class="navigation">

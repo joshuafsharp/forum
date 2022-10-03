@@ -11,7 +11,9 @@ export const Auth = defineComponent({
     const loading = ref(false);
     const email = ref('');
 
-    const handleLogin = async () => {
+    const handleLogin = async (e: any) => {
+      e.preventDefault();
+
       try {
         loading.value = true;
         const { error } = await supabase.auth.signIn({ email: email.value });
@@ -29,11 +31,15 @@ export const Auth = defineComponent({
 
     return () => (
       <form class="row flex-center flex" onSubmit={handleLogin}>
+        <pre>
+          {JSON.stringify(email.value, null, 2)}
+          {/* {loading} */}
+        </pre>
         <div class="col-6 form-widget">
           <h1 class="header">Supabase + Vue 3</h1>
           <p class="description">Sign in via magic link with your email below</p>
           <div>
-            <input class="inputField" type="email" placeholder="Your email" v-model="email" />
+            <input class="inputField" type="email" placeholder="Your email" v-model={email.value} />
           </div>
           <div>
             <input
