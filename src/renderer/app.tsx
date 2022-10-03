@@ -5,6 +5,8 @@ import { setPageContext } from './usePageContext';
 
 import type { PageContext } from '~/types/viteSsr';
 
+import '~/assets/css/tailwind.css';
+
 export const createApp = (pageContext: PageContext) => {
   const { Page, pageProps } = pageContext;
 
@@ -12,8 +14,6 @@ export const createApp = (pageContext: PageContext) => {
     name: 'PageWithLayout',
 
     setup() {
-      console.log(Page, pageProps);
-
       return () => {
         if (Page) {
           return (

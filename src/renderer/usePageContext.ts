@@ -4,6 +4,7 @@
 import { inject } from 'vue';
 
 import type { PageContext } from '~/types/viteSsr';
+
 import type { App, InjectionKey } from 'vue';
 
 export { usePageContext };
